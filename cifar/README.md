@@ -16,19 +16,25 @@ This is the hyperparameters that has been used when training on CIFAR-10 dataset
 
 ### Training details reported by paper authors
 
+```
 lr_gen = 0.0001 ---> Learning rate for generator
 lr_dis = 0.0001 ---> Learning rate for discriminator
 latent_dim = 384 ---> Latent dimension
 gener_batch_size = 60 ---> Batch size for generator
 dis_batch_size = 30 ---> Batch size for discriminator
+```
 
 ### Training hyperparameters given by code author
+
+```
 epoch = 200 ---> Number of epoch
 weight_decay = 1e-3 ---> Weight decay
 drop_rate = 0.5 ---> dropout
+```
 
 ### Architecture details
 
+```
 image_size = 32 ---> H,W size of image for discriminator
 initial_size = 8 ---> Initial size for generator
 patch_size = 16 ---> Patch size for generated image
@@ -40,7 +46,7 @@ depth1 = 5 ---> depth for first transformers encoder block-set which is after ML
 depth2 = 2 ---> depth for second transformers encoder block-set which is after first encoder block for generator
 depth3 = 2 ---> depth for third transformers encoder block-set which is after second encoder block for generator
 heads = 8 ---> head for attention mechanism
-
+```
 
 ## Pre-trained Model
 
