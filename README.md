@@ -6,8 +6,8 @@ This is re-implementation of [TransGAN](https://arxiv.org/abs/2102.07074) in PyT
 
 Generative Adversarial Networks-GAN builded completely free of Convolutions and used Transformers architectures which became popular since Vision Transformers-[ViT](https://arxiv.org/abs/2010.11929). In this implementatio, MNIST and CIFAR-10 dataset were used. For MNIST, you can look at [here](https://github.com/asarigun/TransGAN/blob/main/main.ipynb).
 
-<p align="center"><img width="80%" src="https://github.com/asarigun/TransGAN/blob/main/results/transgan_mnist1.gif"></p>
-<p align="center"><img width="80%" src="https://github.com/asarigun/TransGAN/blob/main/results/transgan_mnist2.gif"></p>
+<p align="center"><img width="49%" src="https://github.com/asarigun/TransGAN/blob/main/results/transgan_mnist1.gif"></p>
+<p align="center"><img width="49%" src="https://github.com/asarigun/TransGAN/blob/main/results/transgan_mnist2.gif"></p>
 
 For CIFAR-10 dataset you can look at detailed README [here](https://github.com/asarigun/TransGAN/blob/main/cifar/README.md) at ```./cifar``` directory.
 
