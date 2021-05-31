@@ -22,7 +22,7 @@ In this implementation, as a Transformer Block, Vision Transformer(ViT) Block wa
 
 <p align="center"><img width="80%" src="https://github.com/asarigun/TransGAN/blob/main/images/vit.gif"></p>
 
-Credits for illustration of ViT: @lucidrains 
+Credits for illustration of ViT: [@lucidrains](https://github.com/lucidrains) 
 
 
 ## Citation
