@@ -1,4 +1,4 @@
-# TransGAN [[Presentation]](https://www.youtube.com/watch?v=xwrUkHiDoiY)
+# TransGAN [[YouTube]](https://www.youtube.com/watch?v=xwrUkHiDoiY)
 
 This is re-implementation of [TransGAN](https://arxiv.org/abs/2102.07074) in PyTorch.
 
