@@ -21,23 +21,7 @@ from inception_score import *
 
 
 parser = argparse.ArgumentParser()
-#parser.add_argument('--no-cuda', action='store_true', default=False, help='Disables CUDA training.')
-#parser.add_argument('--fastmode', action='store_true', default=False, help='Validate during training pass.')
 parser.add_argument('--seed', type=int, default=42, help='Random seed.')
-#parser.add_argument('--epochs', type=int, default=200, help='Number of epochs to train.')
-#parser.add_argument('--lr', type=float, default=0.01, help='Initial learning rate.')
-#parser.add_argument('--weight_decay', type=float, default=5e-4, help='Weight decay (L2 loss on parameters).')
-#parser.add_argument('--hidden', type=int, default=16, help='Number of hidden units.')
-#parser.add_argument('--dropout', type=float, default=0.5, help='Dropout rate (1 - keep probability).')
-#parser.add_argument('--early_stopping',type=int, default=10, help='Tolerance for early stopping (# of epochs).')
-#parser.add_argument('--max_degree', type=int, default=3, help='Maximum Chebyshev polynomial degree.')
-#parser.add_argument('--start_test', type=int, default=80, help='define from which epoch test')
-#parser.add_argument('--train_jump', type=int, default=0, help='define whether train jump, defaul train_jump=0')
-#parser.add_argument('--dataset', type=str, default="cora", help='define your dataset eg. "cora" ')
-#parser.add_argument('--train_percentage', type=float, default=0.1 , help='define the percentage of training data.')
-#parser.add_argument('--attack_dimension', type=int, default=0, help='define how many dimension of the node feature to attack')
-
-
 parser.add_argument('--image_size', type=int, default= 32 , help='Size of image for discriminator input.')
 parser.add_argument('--initial_size', type=int, default=8 , help='Initial size for generator.')
 parser.add_argument('--patch_size', type=int, default=16 , help='Patch size for generated image.')
@@ -79,9 +63,6 @@ torch.cuda.manual_seed(args.seed)"""
 #if args.cuda:
 #    torch.cuda.manual_seed(args.seed)
 
-
-# Load data
-#add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data(args.batch_size, args.img_size)
 
 generator= Generator(depth1=5, depth2=2, depth3=2, initial_size=8, dim=384, heads=8, mlp_ratio=4, drop_rate=0.5)#,device = device)
 generator.to(device)
