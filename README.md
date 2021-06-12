@@ -26,6 +26,9 @@ In this implementation, as a Transformer Block, Vision Transformer(ViT) Block wa
 
 Credits for illustration of ViT: [@lucidrains](https://github.com/lucidrains) 
 
+## News
+
+Please wait for version 2.0 for TransGAN for CIFAR-10 dataset.
 
 ## Citation
 ```
