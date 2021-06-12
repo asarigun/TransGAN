@@ -28,7 +28,7 @@ Credits for illustration of ViT: [@lucidrains](https://github.com/lucidrains)
 
 ## News
 
-Please wait for version 2.0 for TransGAN for CIFAR-10 dataset.
+Please wait for version 2.0 of TransGAN for CIFAR-10 dataset.
 
 ## Citation
 ```
