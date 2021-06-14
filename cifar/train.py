@@ -14,6 +14,7 @@ from tensorboardX import SummaryWriter
 from tqdm import tqdm
 from copy import deepcopy
 
+from adamw import *
 from utils import *
 from models import *
 from fid_score import *
@@ -26,17 +27,18 @@ parser.add_argument('--image_size', type=int, default= 32 , help='Size of image 
 parser.add_argument('--initial_size', type=int, default=8 , help='Initial size for generator.')
 parser.add_argument('--patch_size', type=int, default=16 , help='Patch size for generated image.')
 parser.add_argument('--num_classes', type=int, default=1 , help='Number of classes for discriminator.')
-parser.add_argument('--lr_gen', type=int, default=0.0002 , help='Learning rate for generator.')
-parser.add_argument('--lr_dis', type=int, default=0.0002 , help='Learning rate for discriminator.')
-parser.add_argument('--weight_decay', type=int, default=3e-5 , help='Weight decay.')
-parser.add_argument('--latent_dim', type=int, default=384 , help='Latent dimension.')
+parser.add_argument('--lr_gen', type=float, default=0.0001 , help='Learning rate for generator.')
+parser.add_argument('--lr_dis', type=float, default=0.0001 , help='Learning rate for discriminator.')
+parser.add_argument('--weight_decay', type=float, default=1e-3 , help='Weight decay.')
+parser.add_argument('--latent_dim', type=int, default=1024 , help='Latent dimension.')
 parser.add_argument('--n_critic', type=int, default=5 , help='n_critic.')
-parser.add_argument('--gener_batch_size', type=int, default=16 , help='Batch size for generator.')
-parser.add_argument('--dis_batch_size', type=int, default=16 , help='Batch size for discriminator.')
+parser.add_argument('--gener_batch_size', type=int, default=64 , help='Batch size for generator.')
+parser.add_argument('--dis_batch_size', type=int, default=32 , help='Batch size for discriminator.')
 parser.add_argument('--epoch', type=int, default=200 , help='Number of epoch.')
 parser.add_argument('--output_dir', type=str, default='checkpoint' , help='Checkpoint.')
 parser.add_argument('--dim', type=int, default=384 , help='Embedding dimension.')
 parser.add_argument('--img_name', type=str, default="img_name" , help='Name of pictures file.')
+parser.add_argument('--optim', type=str, default="Adam" , help='Choose your optimizer')
 
 if torch.cuda.is_available():
     dev = "cuda:0"
@@ -47,21 +49,10 @@ device = torch.device(dev)
 print("Device:",device)
 
 args = parser.parse_args()
-#args.cuda = not args.no_cuda and torch.cuda.is_available()
+
 
 np.random.seed(args.seed)
 torch.manual_seed(args.seed)
-"""if args.cuda:
-torch.cuda.manual_seed(args.seed)"""
-
-
-#args = parser.parse_args()
-#args.cuda = not args.no_cuda and torch.cuda.is_available()
-
-#np.random.seed(args.seed)
-#torch.manual_seed(args.seed)
-#if args.cuda:
-#    torch.cuda.manual_seed(args.seed)
 
 
 generator= Generator(depth1=5, depth2=2, depth3=2, initial_size=8, dim=384, heads=8, mlp_ratio=4, drop_rate=0.5)#,device = device)
@@ -76,11 +67,20 @@ discriminator.to(device)
 generator.apply(inits_weight)
 discriminator.apply(inits_weight)
 
-optim_gen = optim.Adam(filter(lambda p: p.requires_grad, generator.parameters()),
-                lr=args.lr_gen, weight_decay=args.weight_decay)
+if args.optim == 'Adam':
+    optim_gen = optim.Adam(filter(lambda p: p.requires_grad, generator.parameters()), lr=args.lr_gen, eps=1e-08, weight_decay=args.weight_decay)
+    optim_dis = optim.Adam(filter(lambda p: p.requires_grad, discriminator.parameters()), lr=args.lr_dis, eps=1e-08, weight_decay=args.weight_decay)
+    
+elif args.optim == 'SGD':
+    optim_gen = optim.SGD(filter(lambda p: p.requires_grad, generator.parameters()), lr=args.lr_gen, momentum=0.9)
+    optim_dis = optim.SGD(filter(lambda p: p.requires_grad, discriminator.parameters()), lr=args.lr_dis, momentum=0.9)
 
-optim_dis = optim.Adam(filter(lambda p: p.requires_grad, discriminator.parameters()),
-                lr=args.lr_dis, weight_decay=args.weight_decay)
+elif args.optim == 'RMSprop':
+    optim_gen = optim.RMSprop(filter(lambda p: p.requires_grad, discriminator.parameters()), lr=args.lr_dis, eps=1e-08, weight_decay=args.weight_decay, momentum=0, centered=False)
+    optim_dis = optim.RMSprop(filter(lambda p: p.requires_grad, discriminator.parameters()), lr=args.lr_dis, eps=1e-08, weight_decay=args.weight_decay, momentum=0, centered=False)
+
+
+print("optim:",args.optim)
 
 fid_stat = 'fid_stat/fid_stats_cifar10_train.npz'
 
@@ -118,8 +118,6 @@ def train(noise,generator, discriminator, optim_gen, optim_dis,
         optim_dis.zero_grad()
         real_valid=discriminator(real_imgs)
         fake_imgs = generator(noise).detach()
-        
-        #assert fake_imgs.size() == real_imgs.size(), f"fake_imgs.size(): {fake_imgs.size()} real_imgs.size(): {real_imgs.size()}"
 
         fake_valid = discriminator(fake_imgs)
 
@@ -146,7 +144,6 @@ def train(noise,generator, discriminator, optim_gen, optim_dis,
 
             gen_step += 1
 
-            #writer_dict['train_global_steps'] = global_steps + 1
 
         if gen_step and index % 100 == 0:
             sample_imgs = generated_imgs[:25]
@@ -154,9 +151,6 @@ def train(noise,generator, discriminator, optim_gen, optim_dis,
             save_image(sample_imgs, f'generated_images/generated_img_{epoch}_{index % len(train_loader)}.jpg', nrow=5, normalize=True, scale_each=True)            
             tqdm.write("[Epoch %d] [Batch %d/%d] [D loss: %f] [G loss: %f]" %
                 (epoch+1, index % len(train_loader), len(train_loader), loss_dis.item(), gener_loss.item()))
-
-        #writer_dict['train_global_steps'] = global_steps + 1
-
 
 
 def validate(generator, writer_dict, fid_stat):
@@ -166,7 +160,7 @@ def validate(generator, writer_dict, fid_stat):
         global_steps = writer_dict['valid_global_steps']
 
         generator = generator.eval()
-        fid_score = get_fid(fid_stat, epoch, generator, num_img=5000, val_batch_size=60*2, latent_dim=384, writer_dict=None, cls_idx=None)
+        fid_score = get_fid(fid_stat, epoch, generator, num_img=5000, val_batch_size=60*2, latent_dim=1024, writer_dict=None, cls_idx=None)
 
 
         print(f"FID score: {fid_score}")
