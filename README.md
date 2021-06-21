@@ -6,6 +6,8 @@
   <a href="https://github.com/asarigun/TransGAN/blob/main/LICENSE"><img src="https://img.shields.io/github/license/thudm/cogdl"/></a>
 </p>
 
+<p align="center"><img width="40%" src="https://github.com/asarigun/la-gcn-torch/blob/main/images/pytorch.png"></p>
+
 This is re-implementation of [TransGAN](https://arxiv.org/abs/2102.07074) in PyTorch.
 
 <p align="center"><img width="100%" src="https://github.com/asarigun/TransGAN/blob/main/images/transgan.jpg"></p>
