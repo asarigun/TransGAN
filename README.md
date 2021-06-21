@@ -1,4 +1,10 @@
-# TransGAN [[YouTube Video]](https://www.youtube.com/watch?v=xwrUkHiDoiY)
+# TransGAN <!--[[YouTube Video]](https://www.youtube.com/watch?v=xwrUkHiDoiY)-->
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2102.07074"><img src="https://img.shields.io/badge/Paper-Report-red"/></a>
+  <a href="https://www.youtube.com/watch?v=xwrUkHiDoiY"><img src="https://img.shields.io/badge/YouTube-Video-ff69b4"/></a>
+  <a href="https://github.com/asarigun/TransGAN/blob/main/LICENSE"><img src="https://img.shields.io/github/license/thudm/cogdl"/></a>
+</p>
 
 This is re-implementation of [TransGAN](https://arxiv.org/abs/2102.07074) in PyTorch.
 
