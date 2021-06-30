@@ -25,6 +25,10 @@ Before training, please check the ```requirements.txt```.
 <p align="center"><img width="30%" src="https://github.com/asarigun/TransGAN/blob/main/results/transgan_mnist1.gif"></p>
 <p align="center"><img width="30%" src="https://github.com/asarigun/TransGAN/blob/main/results/transgan_mnist2.gif"></p>-->
 
+<p float="center">
+  <img src="https://github.com/asarigun/TransGAN/blob/main/images/atransgan_cifar.gif" width="49%" />
+</p>
+
 For CIFAR-10 dataset you can look at detailed README [here](https://github.com/asarigun/TransGAN/blob/main/cifar/README.md) at ```./cifar``` directory.
 
 ## Related Work - Vision Transformers ([ViT](https://openreview.net/pdf?id=YicbFdNTTy))
