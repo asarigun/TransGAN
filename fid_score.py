@@ -45,7 +45,9 @@ except ImportError:
 
 
 parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
-parser.add_argument('path', type=str, nargs=2, help=('Path to the generated images or ''to .npz statistic files'))
+parser.add_argument('path', type=str, nargs=2,
+                    help=('Path to the generated images or '
+                          'to .npz statistic files'))
 parser.add_argument('--batch-size', type=int, default=50,
                     help='Batch size to use')
 parser.add_argument('--dims', type=int, default=2048,
@@ -73,9 +75,9 @@ def sqrt_newton_schulz(A, numIters, dtype=None):
     batchSize = A.shape[0]
     dim = A.shape[1]
     normA = A.mul(A).sum(dim=1).sum(dim=1).sqrt()
-    Y = A.div(normA.view(batchSize, 1, 1).expand_as(A)).to("cpu")
-    I = torch.eye(dim, dim).view(1, dim, dim).repeat(batchSize, 1, 1).type(dtype).to("cpu")
-    Z = torch.eye(dim, dim).view(1, dim, dim).repeat(batchSize, 1, 1).type(dtype).to("cpu")
+    Y = A.div(normA.view(batchSize, 1, 1).expand_as(A)).to("cuda:0")
+    I = torch.eye(dim, dim).view(1, dim, dim).repeat(batchSize, 1, 1).type(dtype).to("cuda:0")
+    Z = torch.eye(dim, dim).view(1, dim, dim).repeat(batchSize, 1, 1).type(dtype).to("cuda:0")
     for i in range(numIters):
         T = 0.5 * (3.0 * I - Z.bmm(Y))
         Y = Y.bmm(T)
@@ -157,8 +159,8 @@ def get_activations(gen_imgs, model, batch_size=50, dims=2048,
         end = start + batch_size
 
         images = gen_imgs[start: end]
-        model.to("cpu")
-        pred = model(images.to("cpu"))[0]
+        model.to("cuda:0")
+        pred = model(images.to("cuda:0"))[0]
 
         # If model output is not scalar, apply global spatial average pooling.
         # This happens if you choose a dimensionality not equal 2048.
@@ -249,7 +251,7 @@ def _compute_statistics_of_path(path, model, batch_size, dims, cuda):
     return m, s
 
 
-def calculate_fid_given_paths_torch(gen_imgs, path, require_grad=False, batch_size=50, cpu=True, dims=2048):
+def calculate_fid_given_paths_torch(gen_imgs, path, require_grad=False, batch_size=50, cuda=True, dims=2048):
     """
     Calculates the FID of two paths
     :param gen_imgs: The value range of gen_imgs should be (-1, 1). Just the output of tanh.
@@ -278,8 +280,8 @@ def calculate_fid_given_paths_torch(gen_imgs, path, require_grad=False, batch_si
         m2, s2 = _compute_statistics_of_path(path, model, batch_size,
                                              dims, cuda)
         # print(f'GT stat: {m2}, {s2}')
-        fid_value = torch_calculate_frechet_distance(m1.to("cpu"), s1.to("cpu"), torch.tensor(m2).float().to("cpu"),
-                                                     torch.tensor(s2).float().to("cpu"))
+        fid_value = torch_calculate_frechet_distance(m1.to("cuda:0"), s1.to("cuda:0"), torch.tensor(m2).float().cuda().to("cuda:0"),
+                                                     torch.tensor(s2).float().cuda().to("cuda:0"))
 
         return fid_value
 
@@ -293,7 +295,7 @@ def get_fid(fid_stat, epoch, generator, num_img, val_batch_size, latent_dim, wri
         eval_iter = num_img // val_batch_size
         img_list = []
         for _ in tqdm(range(eval_iter), desc='sample images'):
-            noise = torch.FloatTensor(np.random.normal(0, 1, (val_batch_size, latent_dim)))
+            noise = torch.cuda.FloatTensor(np.random.normal(0, 1, (val_batch_size, latent_dim)))
 
             # Generate a batch of images
             #if args.n_classes > 0:
@@ -319,5 +321,3 @@ def get_fid(fid_stat, epoch, generator, num_img, val_batch_size, latent_dim, wri
         writer_dict['valid_global_steps'] = global_steps + 1
 
     return fid_score
-
-
