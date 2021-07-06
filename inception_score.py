@@ -334,7 +334,7 @@ class FIDInceptionE_2(torchvision.models.inception.InceptionE):
         outputs = [branch1x1, branch3x3, branch3x3dbl, branch_pool]
         return torch.cat(outputs, 1)
 
-def inception_score(imgs, cpu=True, batch_size=32, resize=False, splits=1):
+def inception_score(imgs, cuda=True, batch_size=32, resize=False, splits=1):
     """Computes the inception score of the generated images imgs
     imgs -- Torch dataset of (3xHxW) numpy images normalized in the range [-1, 1]
     cuda -- whether or not to run on GPU
@@ -417,4 +417,4 @@ if __name__ == '__main__':
     IgnoreLabelDataset(cifar)
 
     print ("Calculating Inception Score...")
-    print (inception_score(IgnoreLabelDataset(cifar), cpu=True, batch_size=32, resize=True, splits=10))
+    print (inception_score(IgnoreLabelDataset(cifar), cuda=True, batch_size=32, resize=True, splits=10))
