@@ -25,7 +25,23 @@ Before training, please check the ```requirements.txt```.
 <p align="center"><img width="30%" src="https://github.com/asarigun/TransGAN/blob/main/results/transgan_mnist1.gif"></p>
 <p align="center"><img width="30%" src="https://github.com/asarigun/TransGAN/blob/main/images/atransgan_cifar.gif"></p>-->
 
-<p align="center"><img width="50%" src="https://github.com/asarigun/TransGAN/blob/main/images/atransgan_cifar.gif"></p>
+<table>
+<tr>
+<td style="text-align: center">0 Epoch</td>
+<td style="text-align: center">40 Epoch</td> 
+<td style="text-align: center">100 Epoch</td>
+<td style="text-align: center">200 Epoch</td> 
+</tr>
+<trt>
+<p align="center"><img width="30%" src="https://raw.githubusercontent.com/asarigun/TransGAN/main/images/atransgan_cifar.gif"></p>
+</tr>
+<tr>
+<td> <img src="https://raw.githubusercontent.com/asarigun/TransGAN/main/results/0.jpg" style="width: 400px;"/> </td>
+<td> <img src="https://raw.githubusercontent.com/asarigun/TransGAN/main/results/40.jpg" style="width: 400px;"/> </td>
+<td> <img src="https://raw.githubusercontent.com/asarigun/TransGAN/main/results/100.jpg" style="width: 400px;"/> </td>
+<td> <img src="https://raw.githubusercontent.com/asarigun/TransGAN/main/results/200.jpg" style="width: 400px;"/> </td>
+</tr>
+</table>
 
 For CIFAR-10 dataset you can look at detailed README [here](https://github.com/asarigun/TransGAN/blob/main/cifar/README.md) at ```./cifar``` directory.
 
