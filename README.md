@@ -60,7 +60,9 @@ Before running ```train.py```, check whether you have libraries in ```requiremen
 
 ## Training 
 
-```python train.py```
+```
+python train.py
+```
 
 ## Citation
 ```
