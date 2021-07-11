@@ -56,7 +56,7 @@ Credits for illustration of ViT: [@lucidrains](https://github.com/lucidrains)
 
 ## Installation
 
-Before running ```train.py```, check whether you have libraries in ```requirements.txt```! Also, create ```./fid_stat``` folder and download the ![fid_stat](bioinf.jku.at/research/ttur/ttur_stats/fid_stats_cifar10_train.npz) file in this folder. To save your model during training, create ```./checkpoint``` folder using ```mkdir checkpoint```.
+Before running ```train.py```, check whether you have libraries in ```requirements.txt```! Also, create ```./fid_stat``` folder and download the [fid_stats_cifar10_train.npz](http://bioinf.jku.at/research/ttur/ttur_stats/fid_stats_cifar10_train.npz) file in this folder. To save your model during training, create ```./checkpoint``` folder using ```mkdir checkpoint```.
 
 ## Training 
 
