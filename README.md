@@ -48,7 +48,7 @@ Generative Adversarial Networks-GAN builded completely free of Convolutions and 
 
 ## Related Work - Vision Transformers ([ViT](https://openreview.net/pdf?id=YicbFdNTTy))
 
-In this implementation, as a Transformer Block, Vision Transformer(ViT) Block was used. In order to get more info about ViT, you can look at the original paper [here](https://arxiv.org/abs/2010.11929)
+In this implementation, as a discriminator, Vision Transformer(ViT) Block was used. In order to get more info about ViT, you can look at the original paper [here](https://arxiv.org/abs/2010.11929)
 
 <p align="center"><img width="80%" src="https://github.com/asarigun/TransGAN/blob/main/images/vit.gif"></p>
 
