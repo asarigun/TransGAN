@@ -81,7 +81,7 @@ python train.py
   year={2020}
 }
 ```
-```
+```bibtex
 @inproceedings{zhao2020diffaugment,
   title={Differentiable Augmentation for Data-Efficient GAN Training},
   author={Zhao, Shengyu and Liu, Zhijian and Lin, Ji and Zhu, Jun-Yan and Han, Song},
