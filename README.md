@@ -64,6 +64,10 @@ Before running ```train.py```, check whether you have libraries in ```requiremen
 python train.py
 ```
 
+## License
+
+MIT
+
 ## Citation
 ```bibtex
 @article{jiang2021transgan,
