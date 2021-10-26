@@ -2,7 +2,7 @@
 
 Paper Authors: Yifan Jiang, Shiyu Chang, Zhangyang Wang
 
-*CVPR 2021*
+*NeurIPS 2021*
 
 <!--
 <p align="center">
