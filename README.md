@@ -60,8 +60,24 @@ Before running ```train.py```, check whether you have libraries in ```requiremen
 
 ## Training 
 
-```
+```bash
 python train.py
+```
+## Pretrained Model
+
+You can find pretrained model [here](https://drive.google.com/file/d/134GJRMxXFEaZA0dF-aPpDS84YjjeXPdE/view). You can download using:
+
+```bash
+
+wget https://drive.google.com/file/d/134GJRMxXFEaZA0dF-aPpDS84YjjeXPdE/view
+
+```
+or 
+
+```bash
+
+curl gdrive.sh | bash -s https://drive.google.com/file/d/134GJRMxXFEaZA0dF-aPpDS84YjjeXPdE/view
+
 ```
 
 ## License
