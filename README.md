@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/372562930.svg)](https://zenodo.org/doi/10.5281/zenodo.10806359)
+
 # TransGAN: Two Transformers Can Make One Strong GAN [[YouTube Video]](https://www.youtube.com/watch?v=xwrUkHiDoiY)
 
 Paper Authors: Yifan Jiang, Shiyu Chang, Zhangyang Wang
@@ -85,6 +87,17 @@ curl gdrive.sh | bash -s https://drive.google.com/file/d/134GJRMxXFEaZA0dF-aPpDS
 MIT
 
 ## Citation
+
+The codes are available on [Zenodo](https://zenodo.org/records/10806360). If you utilize the code, please make sure to cite the repository as well as the original paper.
+
+### Cite This Repo
+
+
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10806360.svg)](https://doi.org/10.5281/zenodo.10806360)
+
+### Cite the Original Paper(s)
+
 ```bibtex
 @article{jiang2021transgan,
   title={TransGAN: Two Transformers Can Make One Strong GAN},
